@@ -241,10 +241,11 @@ section {
     background-color: rgba(0, 0, 0, 0.7); /* Siyah ve %70 şeffaf */
     border: 1px solid rgba(255, 255, 255, 0.5); /* Hafif beyaz kenarlık */
     color: var(--light-text-color); /* Metin rengi açık olacak */
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; /* Hover geçişleri için eklendi/emin olundu */
 }
 
 .hero-content .btn-primary:hover {
-    background-color: rgba(0, 0, 0, 0.9); /* Hoverda daha az şeffaf veya tam siyah */
+    background-color: rgba(0, 0, 0, 0.9); /* Hoverda daha az şeffaf (veya tam siyah: #000) */
     border-color: var(--primary-color); /* Hoverda kenarlık rengi değişebilir */
     color: var(--primary-color); /* Hoverda metin rengi değişebilir */
 }
@@ -384,8 +385,8 @@ section {
 /* Bu bölümdeki başlık ve metinlerin renginin açık olduğundan emin olalım */
 .our-achievements h2 {
     color: var(--light-text-color); /* Başlık rengi açık kalacak */
-    position: relative; 
-    z-index: 2; 
+    position: relative;
+    z-index: 2;
 }
 
 /* İSTATİSTİK KUTUCUKLARI (STAT ITEMS) */
@@ -416,7 +417,7 @@ section {
 .stat-number {
     font-size: 3.5em;
     font-weight: 700;
-    color: var(--accent-color); /* Vurgu rengiyle daha iyi durabilir veya light-text-color */
+    color: var(--light-text-color); /* Sayılar beyaz yapıldı */
     margin-bottom: 10px;
     line-height: 1;
 }
