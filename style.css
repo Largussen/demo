@@ -275,9 +275,9 @@ section {
 }
 
 .category-item {
-    background-color: #fff; /* Kategori kutularının arka planı beyaz olsun */
+    background-color: rgba(0, 0, 0, 0.4); /* Şeffafımsı koyu (siyahın %40 opaklığı) */
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Gölgeyi biraz daha belirginleştirelim */
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
@@ -285,6 +285,7 @@ section {
     align-items: center;
     text-align: center;
     padding-bottom: 20px;
+    color: var(--light-text-color); /* Metin rengini açık yapalım ki okunabilsin */
 }
 
 .category-item:hover {
@@ -310,12 +311,12 @@ section {
 .category-item h3 {
     margin: 0 0 10px;
     font-size: 1.4em;
-    color: var(--primary-color); /* Kategori başlıkları ana renkte */
+    color: var(--light-text-color); /* Kutucuk koyu olduğu için açık renk */
 }
 
 .category-item p {
     font-size: 0.95em;
-    color: var(--text-color); /* Kategori item'ı beyaz arka planlı olduğu için koyu metin uygun */
+    color: rgba(255, 255, 255, 0.8); /* Açık renkte ve hafif şeffaf */
     padding: 0 15px;
 }
 
@@ -383,13 +384,13 @@ section {
 }
 
 .stat-item {
-    background-color: #fff; /* Kutucukların arka planı BEYAZ olsun */
-    color: var(--text-color); /* Kutucuklardaki genel metin rengi koyu olsun */
+    background-color: rgba(0, 0, 0, 0.4); /* Şeffafımsı koyu (siyahın %40 opaklığı) */
+    color: var(--light-text-color); /* Metin rengini açık yapalım ki okunabilsin */
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Gölgeyi biraz daha belirginleştirelim */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative; /* İçeriğin overlay'in üstünde kalması için */
+    position: relative;
     z-index: 2;
 }
 
@@ -402,14 +403,14 @@ section {
 .stat-number {
     font-size: 3.5em;
     font-weight: 700;
-    color: var(--primary-color); /* Sayıların rengi birincil renk olsun */
+    color: var(--accent-color); /* Vurgu rengiyle daha iyi durabilir veya light-text-color */
     margin-bottom: 10px;
     line-height: 1;
 }
 
 .stat-item p {
     font-size: 1.2em;
-    color: var(--secondary-color); /* Paragraf metni ikincil renk olsun */
+    color: rgba(255, 255, 255, 0.8); /* Açık renkte ve hafif şeffaf */
     margin: 0;
 }
 
