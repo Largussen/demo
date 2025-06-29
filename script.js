@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 onEachFeature: function(feature, layer) {
                     const countryName = feature.properties.NAME;
-                    const iso3 = feature.properties.ISO_A3;
+                    const iso3 = feature.properties['ISO3166-1-Alpha-3'];
                     const data = exportCountriesData[iso3];
 
                     layer.on({
