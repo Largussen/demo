@@ -107,7 +107,7 @@ section {
 
 /* 1. Header */
 .header {
-    background-color: rgba(255, 255, 255, 0.9); /* Başlangıçta hafif şeffaf beyaz */
+    background-color: rgba(200, 200, 200, 0.7); /* Grimsi şeffaf arka plan */
     padding: 10px 0;
     position: fixed;
     width: 100%;
