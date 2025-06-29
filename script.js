@@ -176,13 +176,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     };
                 },
                 onEachFeature: function(feature, layer) {
-                    const countryName = feature.properties.NAME;
-                    const iso3 = feature.properties['ISO3166-1-Alpha-3']; // Düzeltme yapıldı
+                    // countryName'i alırken, eğer yoksa 'Bilinmeyen Ülke' gibi bir yedek isim kullan
+                    const countryName = feature.properties.NAME || 'Bilinmeyen Ülke';
+                    const iso3 = feature.properties['ISO3166-1-Alpha-3'];
                     const data = exportCountriesData[iso3];
 
-                    // Sadece data varsa tooltip'i bind et
+                    // Sadece data varsa tooltip'i bind et, içerik olarak sadece ülke adını kullanıyoruz.
                     if (data) {
-                        layer.bindTooltip(`<b>${countryName}</b><br>${data.info}`);
+                        layer.bindTooltip(`<b>${countryName}</b>`, {
+                            sticky: true // Fareyi takip etmesi için sticky
+                        });
                     }
 
                     layer.on({
@@ -197,17 +200,20 @@ document.addEventListener('DOMContentLoaded', () => {
                             if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
                                 layer.bringToFront();
                             }
-                            // Sadece data varsa tooltip'i aç
-                            if (data) {
+                            // Eğer bu layer'a bir tooltip bind edilmişse, aç
+                            if (layer.getTooltip()) {
                                 layer.openTooltip();
                             }
                         },
                         mouseout: function(e) {
                             layer.setStyle(this.options.style(feature));
-                            layer.closeTooltip();
+                            // Sadece layer'a bir tooltip bind edilmişse kapat
+                            if (layer.getTooltip()) {
+                                layer.closeTooltip();
+                            }
                         },
                         click: function(e) {
-                            // Click olayında da sadece data varsa popup aç
+                            // Tıklama olayında ise tam bilgiyi (Ülke Adı ve Satış Bölgesi) göstermeye devam et
                             if (data) {
                                 layer.bindPopup(`<b>${countryName}</b><br>${data.info}`).openPopup();
                             } else {
