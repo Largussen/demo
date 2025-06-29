@@ -255,7 +255,7 @@ section {
     
     /* Yeni arka plan stili */
     background-color: #1a1a1a; /* Gözü yormayan koyu gri/siyah arka plan rengi */
-    background-image: url('images/bgdesen.png'); /* Bulduğunuz desenin dosya adı */
+    background-image: url('images/bgdesen.png'); /* Bu görselin önceki konuşmamızdaki olduğunu varsayıyorum */
     background-repeat: repeat; /* Deseni tekrar et */
     background-size: auto; /* Desenin orijinal boyutunda kalmasını sağlar */
     
@@ -352,27 +352,52 @@ section {
 
 /* 4. Our Achievements */
 .our-achievements {
-    background-color: var(--bg-dark); /* Koyu arka plan */
-    color: var(--light-text-color);
+    padding: var(--padding-section); /* Mevcut boşlukları koru */
     text-align: center;
+    color: var(--light-text-color); /* Metin rengi açık kalacak */
+
+    background-image: url('images/bgdesen1.png'); /* YENİ GÖRSEL ADI BURADA */
+    background-size: cover; /* Görseli tüm alanı kaplayacak şekilde boyutlandır */
+    background-position: center center; /* Görseli ortala */
+    background-repeat: no-repeat; /* Görseli tekrar etme */
+    background-attachment: fixed; /* Paralaks efekti için (isteğe bağlı) */
+
+    position: relative; /* Overlay için */
+    z-index: 1; /* İçeriğin overlay'in üstünde olması için */
 }
 
-.our-achievements h2 {
-    color: var(--light-text-color);
+/* Arka plan görselinin üzerine bir karartma (overlay) ekleyelim */
+.our-achievements::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* %60 opaklıkta siyah overlay */
+    z-index: -1; /* Overlay'in arka plan görseli ile içerik arasına gelmesi için */
 }
 
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 30px;
-    margin-top: 50px;
+/* Bu bölümdeki başlık ve metinlerin renginin açık olduğundan emin olalım */
+.our-achievements h2,
+.our-achievements .stat-number,
+.our-achievements .stat-item p {
+    color: var(--light-text-color); /* veya doğrudan #fff */
+    position: relative; /* İçeriğin overlay'in üstünde kalması için */
+    z-index: 2; /* Daha yüksek z-index */
 }
 
+/* Stat numarasının vurgu rengini değiştirmeyelim, o iyi duruyor */
+.stat-number {
+    color: var(--accent-color); /* Mevcut vurgu rengini koru */
+}
+
+/* Stat item'larının arka planını şeffaf yapalım, görsel daha iyi görünsün */
 .stat-item {
     background-color: rgba(255, 255, 255, 0.1); /* Hafif şeffaf beyaz kutular */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Gölge efekti */
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease;
 }
 
@@ -380,19 +405,6 @@ section {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
-.stat-number {
-    font-size: 3.5em;
-    font-weight: 700;
-    color: var(--accent-color); /* Vurgu rengi ile sayıları öne çıkar */
-    margin-bottom: 10px;
-    line-height: 1;
-}
-
-.stat-item p {
-    font-size: 1.2em;
-    color: rgba(255, 255, 255, 0.9);
-    margin: 0;
-}
 
 /* 5. World Map Section */
 .world-map-section {
