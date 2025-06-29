@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // GeoJSON verisini yükle ve haritaya ekle
     // Bu dosya, dünya ülkelerinin coğrafi sınırlarını içerir.
-    fetch('world-countries.geojson') // DİKKAT: Artık 'js/' yok, dosya ana dizinde varsayılıyor
+    fetch('world-countries.geojson') 
         .then(response => {
             if (!response.ok) {
                 throw new Error(`GeoJSON yüklenemedi. HTTP Durumu: ${response.status} ${response.statusText}. Dosya yolunu kontrol edin: world-countries.geojson`);
@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(geojson => {
             L.geoJson(geojson, {
                 style: function(feature) {
-                    const iso3 = feature.properties.ISO_A3;
+                    const iso3 = feature.properties['ISO3166-1-Alpha-3'];
                     const data = exportCountriesData[iso3];
                     if (data) {
                         return {
