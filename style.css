@@ -444,6 +444,11 @@ section {
     z-index: 1; /* İçeriğin üstte olması için */
 }
 
+.world-map-section h2 {
+    color: var(--light-text-color); /* Küresel Erişimimiz başlığını beyaz yaptık */
+    margin-bottom: 1.5em; /* Başlık ile harita arasına boşluk ekleyelim */
+}
+
 /* Harita stilleri, olduğu gibi kalsın */
 #world-map {
     border-radius: 10px;
@@ -452,7 +457,12 @@ section {
 
 /* 6. CTA Contact */
 .cta-contact {
-    background-color: rgba(0, 0, 0, 0.7); /* Siyah ve %70 şeffaf */
+    /* İstatistikler kısmıyla aynı arka plan */
+    background-image: url('images/bgdesen1.png'); /* Desen görselinin yolu */
+    background-repeat: repeat; /* Deseni tekrar et */
+    background-size: auto; /* Desenin orijinal boyutunda kalsın */
+    background-color: #1a1a1a; /* Koyu gri arka plan */
+
     color: var(--light-text-color);
     text-align: center;
     padding: 60px 0;
