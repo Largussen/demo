@@ -356,7 +356,7 @@ section {
     text-align: center;
     color: var(--light-text-color); /* Metin rengi açık kalacak */
     
-    background-image: url('images/bgdesen2.png'); /* Desen görselinin yolu */
+    background-image: url('images/bgdesen1.png'); /* Desen görselinin yolu */
     background-repeat: repeat; /* Deseni tekrar et */
     background-size: auto; /* Desenin orijinal boyutunda kalsın */
     background-color: #1a1a1a; /* Ürün kategorilerindeki gibi koyu gri arka plan */
@@ -416,9 +416,20 @@ section {
 
 /* 5. World Map Section */
 .world-map-section {
-    background-color: #fff;
+    padding: var(--padding-section); /* Bölüm boşluğunu koru */
+    text-align: center; /* İçeriği ortala */
+    color: var(--light-text-color); /* Metin rengini açık yap, eğer varsa */
+
+    background-image: url('images/bgdesen.png'); /* Ürün kategorilerindeki gibi bgdesen.png */
+    background-repeat: repeat; /* Deseni tekrar et */
+    background-size: auto; /* Desenin orijinal boyutunda kalsın */
+    background-color: #1a1a1a; /* Ürün kategorilerindeki gibi koyu gri arka plan */
+
+    position: relative; /* Eğer harita z-index ile üstteyse diye */
+    z-index: 1; /* İçeriğin üstte olması için */
 }
 
+/* Harita stilleri, olduğu gibi kalsın */
 #world-map {
     border-radius: 10px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
