@@ -473,6 +473,22 @@ section {
     margin-bottom: 30px;
 }
 
+/* CTA Contact bölümündeki "Bizimle iletişime geçin" butonu */
+.cta-contact .btn-primary {
+    background-color: rgba(0, 0, 0, 0.7); /* Siyah ve %70 şeffaf */
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Hafif beyaz kenarlık */
+    color: var(--light-text-color); /* Metin rengi açık olacak */
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; /* Hover geçişleri için */
+}
+
+.cta-contact .btn-primary:hover {
+    background-color: rgba(0, 0, 0, 0.9); /* Hoverda daha az şeffaf (veya tam siyah: #000) */
+    border-color: var(--primary-color); /* Hoverda kenarlık rengi değişebilir */
+    color: var(--primary-color); /* Hoverda metin rengi değişebilir */
+    transform: translateY(-2px); /* Hero butonu ile aynı yukarı kalkma efekti */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hero butonu ile aynı gölge efekti */
+}
+
 /* 7. Footer */
 .footer {
     background-color: #212529; /* Koyu gri/siyah altbilgi */
