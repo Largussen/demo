@@ -445,7 +445,7 @@ section {
 }
 
 .world-map-section h2 {
-    color: var(--light-text-color); /* Küresel Erişimimiz başlığını beyaz yaptık */
+    color: #ffffff; /* Küresel Erişimimiz başlığını TAM beyaz yaptık */
     margin-bottom: 1.5em; /* Başlık ile harita arasına boşluk ekleyelim */
 }
 
