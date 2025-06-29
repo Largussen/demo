@@ -117,22 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // İhracat yaptığınız ülkeler ve renkleri (ISO 3 harfli kodlar ve renkler)
     // Lütfen bu listeyi kendi ihracat yaptığınız ülkelerin ISO 3-harfli kodlarıyla güncelleyin
     const exportCountriesData = {
-        // Önceden belirlenen ülkeler (isteğe bağlı olarak kalabilir veya kaldırılabilir)
-        'TUR': { color: primaryColor, info: 'Türkiye: Önemli Bir Pazar' },
-        'USA': { color: primaryColor, info: 'Amerika Birleşik Devletleri: Geniş Erişim' },
-        'DEU': { color: primaryColor, info: 'Almanya: Avrupa\'nın Kalbi' },
-        'GBR': { color: primaryColor, info: 'Birleşik Krallık: Stratejik Ortak' },
-        'FRA': { color: primaryColor, info: 'Fransa: Batı Avrupa Pazarı' },
-        'ESP': { color: primaryColor, info: 'İspanya: Akdeniz Bağlantısı' },
-        'ITA': { color: primaryColor, info: 'İtalya: Güney Avrupa\'da Güçlü' },
-        'RUS': { color: primaryColor, info: 'Rusya: Doğu\'ya Uzanan Köprü' },
-        'CHN': { color: primaryColor, info: 'Çin: Asya\'nın Büyükleri' },
-        'ZAF': { color: primaryColor, info: 'Güney Afrika: Afrika Kıtası' },
-        'AUS': { color: primaryColor, info: 'Avustralya: Okyanusya Erişimi' },
-        'CAN': { color: primaryColor, info: 'Kanada: Kuzey Amerika Partneri' },
-        'BRA': { color: primaryColor, info: 'Brezilya: Güney Amerika\'nın Devi' },
-
-        // Yeni eklenen ve kırmızıya boyanacak ülkeler
+        
         'IDN': { color: 'red', info: 'Endonezya: Satış Bölgesi' },
         'BGD': { color: 'red', info: 'Bangladeş: Satış Bölgesi' },
         'IND': { color: 'red', info: 'Hindistan: Satış Bölgesi' },
