@@ -354,8 +354,7 @@ section {
 .our-achievements {
     padding: var(--padding-section); /* Mevcut boşlukları koru */
     text-align: center;
-    color: var(--light-text-color); /* Metin rengi açık kalacak */
-
+    
     background-image: url('images/bgdesen1.png'); /* YENİ GÖRSEL ADI BURADA */
     background-size: cover; /* Görseli tüm alanı kaplayacak şekilde boyutlandır */
     background-position: center center; /* Görseli ortala */
@@ -379,30 +378,42 @@ section {
 }
 
 /* Bu bölümdeki başlık ve metinlerin renginin açık olduğundan emin olalım */
-.our-achievements h2,
-.our-achievements .stat-number,
-.our-achievements .stat-item p {
-    color: var(--light-text-color); /* veya doğrudan #fff */
-    position: relative; /* İçeriğin overlay'in üstünde kalması için */
-    z-index: 2; /* Daha yüksek z-index */
+.our-achievements h2 {
+    color: var(--light-text-color); /* Başlık rengi açık kalacak */
+    position: relative; 
+    z-index: 2; 
 }
 
-/* Stat numarasının vurgu rengini değiştirmeyelim, o iyi duruyor */
-.stat-number {
-    color: var(--accent-color); /* Mevcut vurgu rengini koru */
-}
-
-/* Stat item'larının arka planını şeffaf yapalım, görsel daha iyi görünsün */
+/* Stat item'larının arka planını ORİJİNAL HALİNE GETİRİYORUZ */
 .stat-item {
-    background-color: rgba(255, 255, 255, 0.1); /* Hafif şeffaf beyaz kutular */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Gölge efekti */
+    background-color: #fff; /* Kutucukların arka planı beyaz olsun */
+    color: var(--text-color); /* Kutucuklardaki genel metin rengi koyu olsun */
     padding: 30px;
     border-radius: 10px;
-    transition: background-color 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* Overlay'in üstünde kalması için */
+    z-index: 2;
 }
 
 .stat-item:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-5px); /* Hafif yukarı kalkma */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Daha belirgin gölge */
+}
+
+/* Kutucuk içindeki sayı ve paragrafın renklerini de buna göre ayarlayalım */
+.stat-number {
+    font-size: 3.5em;
+    font-weight: 700;
+    color: var(--primary-color); /* Sayıların rengi birincil renk olsun, vurgu rengi yerine */
+    margin-bottom: 10px;
+    line-height: 1;
+}
+
+.stat-item p {
+    font-size: 1.2em;
+    color: var(--secondary-color); /* Paragraf metni ikincil renk olsun */
+    margin: 0;
 }
 
 
