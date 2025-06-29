@@ -1,0 +1,626 @@
+/* Genel Ayarlar ve Fontlar */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+
+/* HTML ve BODY için kesin tam ekran ve sıfırlama ayarları */
+html, body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+    --primary-color: #0056b3; /* Koyu Mavi - Kurumsal renk */
+    --secondary-color: #28a745; /* Yeşil - Vurgu/CTA renk */
+    --text-color: #333;
+    --light-gray: #f4f4f4;
+    --dark-gray: #555;
+    --border-color: #ddd;
+    --white: #fff;
+    --header-height: 80px;
+    --overlay-color: rgba(0, 0, 0, 0.5); /* Video overlay rengi */
+    --header-bg-transparent: rgba(0, 0, 0, 0.4); /* Şeffaf header bg */
+    --header-bg-solid: rgba(0, 0, 0, 0.8); /* Kaydırıldığında header bg */
+}
+
+/* Tüm elementler için box-sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--white);
+    overflow-x: hidden; /* Sadece body'de yatay taşmayı engelle */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+}
+
+a:hover {
+    color: var(--secondary-color);
+}
+
+ul {
+    list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto', sans-serif;
+    color: var(--dark-gray);
+    margin-bottom: 15px;
+}
+
+h1 { font-size: 2.8em; }
+h2 { font-size: 2.2em; }
+h3 { font-size: 1.8em; }
+
+.btn {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--white) !important;
+    padding: 12px 25px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn:hover {
+    background-color: #004085;
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    background-color: var(--secondary-color);
+}
+
+.btn-primary:hover {
+    background-color: #218838;
+}
+
+.btn-secondary {
+    background-color: var(--dark-gray);
+}
+
+.btn-secondary:hover {
+    background-color: #333;
+}
+
+/* Header Bölümü (ŞEFFAF VE SABİT) */
+.header {
+    background-color: var(--header-bg-transparent); /* Başlangıçta şeffaf */
+    height: var(--header-height);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2000;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Header kaydırıldığında görünümü */
+.header.scrolled {
+    background-color: var(--header-bg-solid); /* Kaydırıldığında daha koyu */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2); /* Hafif gölge ekle */
+}
+
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.header .logo img {
+    height: 60px;
+    filter: brightness(0) invert(1);
+    transition: height 0.3s ease;
+}
+
+.header .logo img:hover {
+    height: 65px;
+}
+
+.main-nav ul {
+    display: flex;
+}
+
+.main-nav ul li {
+    margin-left: 35px;
+}
+
+.main-nav ul li a {
+    color: var(--white);
+    font-weight: 600;
+    padding: 5px 0;
+    position: relative;
+    transition: color 0.3s ease;
+    text-transform: uppercase;
+}
+
+.main-nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: var(--secondary-color);
+    bottom: -5px;
+    left: 0;
+    transition: width 0.3s ease;
+}
+
+.main-nav ul li a:hover::after,
+.main-nav ul li a.active::after {
+    width: 100%;
+}
+
+.main-nav ul li a:hover,
+.main-nav ul li a.active {
+    color: var(--secondary-color);
+}
+
+/* Hero Bölümü (Video Arkaplanlı ve Tam Ekran) */
+.hero-product-focused {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    text-align: center;
+    color: var(--white);
+}
+
+.video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1; /* Metnin arkasında kalacak */
+}
+
+.hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--overlay-color);
+    z-index: 2;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    padding-top: var(--header-height); /* Header'ın içeriği ezmesini önler */
+}
+
+/* Hero h1 için stil */
+.hero-product-focused h1 {
+    color: var(--white);
+    font-size: 4.5em;
+    margin-bottom: 50px; /* Butonla arasındaki boşluk */
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+/* SCROLL ANİMASYONLARI İÇİN YENİ KURALLAR */
+.animate-on-scroll {
+    opacity: 0; /* Başlangıçta gizli */
+    transform: translateY(50px); /* Aşağıdan yukarıya gelsin */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Yumuşak geçiş */
+    transition-delay: var(--animation-delay, 0s); /* JavaScript'ten gecikme alacak */
+}
+
+.animate-on-scroll.animated {
+    opacity: 1; /* Göründüğünde tam şeffaf */
+    transform: translateY(0); /* Kendi pozisyonuna gelsin */
+}
+
+
+/* Ürün Kategorileri Bölümü */
+.product-categories {
+    padding: 80px 0;
+    background-color: var(--light-gray);
+    text-align: center;
+}
+
+.product-categories h2 {
+    margin-bottom: 50px;
+    color: var(--primary-color);
+    font-size: 2.5em;
+    text-transform: uppercase;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.category-item {
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    padding-bottom: 0; /* p etiketi kaldırıldığı için varsayılan padding'i sıfırlıyoruz */
+}
+
+.category-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.category-item a {
+    display: block;
+    color: var(--text-color);
+}
+
+.category-item img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.category-item h3 {
+    margin: 25px 20px; /* Alttan da boşluk verilmişti, şimdi sadece üstten ve yandan */
+    color: var(--primary-color);
+    font-size: 1.6em;
+    text-transform: uppercase;
+    padding-bottom: 20px; /* Buraya yeniden ekleyerek kartın altını doldurabiliriz */
+}
+
+.view-all-products {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    color: var(--white);
+    text-align: center;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.view-all-products:hover {
+    background-color: #004085;
+    transform: scale(1.02);
+}
+
+.view-all-products a {
+    color: var(--white) !important;
+    padding: 40px 20px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.view-all-products h3 {
+    color: var(--white);
+    margin-bottom: 10px;
+    font-size: 1.8em;
+}
+
+.view-all-products p {
+    color: var(--white);
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.view-all-products .fas {
+    font-size: 3em;
+    color: var(--white);
+    margin-top: 15px;
+}
+
+/* Başarılarımız / Sayılarla Biz Bölümü */
+.our-achievements {
+    padding: 80px 0;
+    text-align: center;
+    background-color: var(--primary-color); /* Koyu arkaplan */
+    color: var(--white); /* Beyaz yazı rengi */
+}
+
+.our-achievements h2 {
+    margin-bottom: 50px;
+    color: var(--white); /* Başlık rengi beyaz */
+    font-size: 2.5em;
+    text-transform: uppercase;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+}
+
+.stat-item {
+    background-color: rgba(255, 255, 255, 0.1); /* Hafif şeffaf beyaz arkaplan */
+    padding: 30px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-8px);
+    background-color: rgba(255, 255, 255, 0.15); /* Hover'da biraz daha belirgin */
+}
+
+.stat-item .stat-number {
+    font-size: 3.5em;
+    font-weight: 700;
+    color: var(--secondary-color); /* Vurgulu yeşil renk */
+    margin-bottom: 10px;
+}
+
+.stat-item p {
+    font-size: 1.1em;
+    color: var(--white);
+    opacity: 0.9;
+}
+
+/* Dünya Haritası Bölümü (YENİ) */
+.world-map-section {
+    padding: 80px 0;
+    background-color: var(--light-gray); /* Veya farklı bir arkaplan rengi */
+    text-align: center;
+}
+
+.world-map-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 50px;
+    font-size: 2.5em;
+    text-transform: uppercase;
+}
+
+/* jVectorMap Harita Konteyner Stili */
+#world-map {
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    /* Haritanın arkaplan rengini JavaScript'te belirleyeceğiz */
+}
+
+
+/* CTA - İletişim Öncesi */
+.cta-contact {
+    background-color: var(--light-gray); /* Ekstra bir renk geçişi için arkaplanı değiştirdik */
+    color: var(--text-color); /* Yazı rengi normale döndü */
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.cta-contact h2 {
+    color: var(--primary-color); /* Başlık rengi değişti */
+    margin-bottom: 30px;
+    font-size: 2.8em;
+    text-transform: uppercase;
+}
+
+.cta-contact p {
+    font-size: 1.4em;
+    margin-bottom: 40px;
+    opacity: 0.95;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--dark-gray); /* Paragraf rengi değişti */
+}
+
+.cta-contact .btn {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    padding: 15px 30px;
+    font-size: 1.1em;
+}
+
+.cta-contact .btn:hover {
+    background-color: #218838;
+}
+
+/* Footer Bölümü */
+.footer {
+    background-color: #1a1a1a;
+    color: var(--white);
+    padding: 60px 0 20px;
+    font-size: 0.95em;
+}
+
+.footer .footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-section h3 {
+    color: var(--white);
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.footer-section p, .footer-section li {
+    color: #bbb;
+    line-height: 1.8;
+}
+
+.footer-section a {
+    color: #bbb;
+    transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: var(--primary-color);
+}
+
+.footer-section.contact p .fas {
+    margin-right: 12px;
+    color: var(--secondary-color);
+}
+
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid #333;
+    padding-top: 30px;
+    color: #999;
+    font-size: 0.85em;
+}
+
+/* Responsive Tasarım (Mobil Uyumluluk) */
+@media (max-width: 992px) {
+    h1 { font-size: 3.5em; } 
+    h2 { font-size: 2em; }
+    h3 { font-size: 1.6em; }
+
+    .main-nav ul li {
+        margin-left: 25px;
+    }
+
+    .product-categories, .our-achievements, .world-map-section, .cta-contact, .footer {
+        padding: 60px 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        height: auto;
+        padding: 15px 0;
+        background-color: var(--header-bg-solid);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .header .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .header .logo {
+        margin-bottom: 15px;
+    }
+
+    .header .logo img {
+        height: 50px;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .main-nav ul li {
+        margin: 10px 0;
+    }
+
+    .main-nav ul li a {
+        color: var(--white);
+    }
+
+    .hero-product-focused {
+        min-height: 80vh;
+    }
+
+    h1 { font-size: 2.8em; } 
+
+    .category-grid,
+    .stats-grid, 
+    .footer .footer-content {
+        grid-template-columns: 1fr;
+    }
+
+    .category-item,
+    .stat-item { 
+        padding: 30px;
+        text-align: center;
+    }
+
+    .category-item h3 {
+        margin-top: 15px;
+        text-align: center;
+    }
+
+    .view-all-products a {
+        padding: 30px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 { font-size: 2.5em; } 
+    h2 { font-size: 1.8em; }
+    h3 { font-size: 1.5em; }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
+
+    .header .logo img {
+        height: 40px;
+    }
+
+    .main-nav ul li {
+        margin-left: 15px;
+    }
+
+    .product-categories, .our-achievements, .world-map-section, .cta-contact, .footer {
+        padding: 40px 0;
+    }
+
+    .cta-contact h2 {
+        font-size: 2em;
+    }
+
+    .cta-contact p {
+        font-size: 1.1em;
+    }
+
+    .stat-item .stat-number { 
+        font-size: 2.8em;
+    }
+}
