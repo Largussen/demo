@@ -384,20 +384,27 @@ section {
     z-index: 2; 
 }
 
-/* Stat item'larının arka planını ORİJİNAL HALİNE GETİRİYORUZ */
+/* İSTATİSTİK KUTUCUKLARI (STAT ITEMS) DÜZELTİLMİŞ HALİ */
+.stats-grid {
+    display: grid; /* Grid düzenini geri getiriyoruz */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Kare gibi yan yana durmaları için */
+    gap: 30px; /* Kutucuklar arası boşluk */
+    margin-top: 50px;
+}
+
 .stat-item {
-    background-color: #fff; /* Kutucukların arka planı beyaz olsun */
+    background-color: #fff; /* Kutucukların arka planı BEYAZ olsun, şeffaf değil */
     color: var(--text-color); /* Kutucuklardaki genel metin rengi koyu olsun */
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative; /* Overlay'in üstünde kalması için */
+    position: relative; /* İçeriğin overlay'in üstünde kalması için */
     z-index: 2;
 }
 
 .stat-item:hover {
-    transform: translateY(-5px); /* Hafif yukarı kalkma */
+    transform: translateY(-5px); /* Hafif yukarı kalkma efekti */
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Daha belirgin gölge */
 }
 
@@ -405,7 +412,7 @@ section {
 .stat-number {
     font-size: 3.5em;
     font-weight: 700;
-    color: var(--primary-color); /* Sayıların rengi birincil renk olsun, vurgu rengi yerine */
+    color: var(--primary-color); /* Sayıların rengi birincil renk olsun */
     margin-bottom: 10px;
     line-height: 1;
 }
