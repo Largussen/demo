@@ -82,12 +82,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Eğer scroll yukarı çıkıp tekrar aşağı inince animasyonun tekrar çalışmasını istiyorsan yukarıdaki satırı yorum satırı yap veya sil.
                 // Not: animate-on-scroll her zaman çalışır, stat-item için ek kontrol var.
             } else {
-                 // Eğer öğe görünür alandan çıkarsa 'animated' sınıfını kaldır (isteğe bağlı, tekrar animasyon için)
-                 // entry.target.classList.remove('animated'); 
-                 // if (entry.target.classList.contains('stat-item')) {
-                 //    entry.target.dataset.counted = 'false'; // Tekrar sayılabilir yapsın
-                 //    entry.target.querySelector('.stat-number').textContent = '0'; // Sayıyı sıfırla
-                 // }
+                // Eğer öğe görünür alandan çıkarsa 'animated' sınıfını kaldır (isteğe bağlı, tekrar animasyon için)
+                // entry.target.classList.remove('animated');
+                // if (entry.target.classList.contains('stat-item')) {
+                //    entry.target.dataset.counted = 'false'; // Tekrar sayılabilir yapsın
+                //    entry.target.querySelector('.stat-number').textContent = '0'; // Sayıyı sıfırla
+                // }
             }
         });
     }, observerOptions);
@@ -115,26 +115,46 @@ document.addEventListener('DOMContentLoaded', () => {
     const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim();
 
     // İhracat yaptığınız ülkeler ve renkleri (ISO 3 harfli kodlar ve renkler)
-    // JVectorMap'teki ISO 2 harfli kodları (TR, US) ISO 3 harfliye (TUR, USA) dönüştürdük.
     // Lütfen bu listeyi kendi ihracat yaptığınız ülkelerin ISO 3-harfli kodlarıyla güncelleyin
     const exportCountriesData = {
-        'TUR': { color: primaryColor, info: 'Türkiye: Önemli Bir Pazar' }, 
-        'USA': { color: primaryColor, info: 'Amerika Birleşik Devletleri: Geniş Erişim' }, 
-        'DEU': { color: primaryColor, info: 'Almanya: Avrupa\'nın Kalbi' }, 
-        'GBR': { color: primaryColor, info: 'Birleşik Krallık: Stratejik Ortak' }, 
-        'FRA': { color: primaryColor, info: 'Fransa: Batı Avrupa Pazarı' }, 
-        'ESP': { color: primaryColor, info: 'İspanya: Akdeniz Bağlantısı' }, 
-        'ITA': { color: primaryColor, info: 'İtalya: Güney Avrupa\'da Güçlü' }, 
-        'RUS': { color: primaryColor, info: 'Rusya: Doğu\'ya Uzanan Köprü' }, 
-        'CHN': { color: primaryColor, info: 'Çin: Asya\'nın Büyükleri' }, 
-        'IND': { color: primaryColor, info: 'Hindistan: Yükselen Pazar' }, 
-        'ARE': { color: primaryColor, info: 'Birleşik Arap Emirlikleri: Ortadoğu Merkezi' }, 
-        'SAU': { color: primaryColor, info: 'Suudi Arabistan: Körfez Bölgesi' }, 
-        'EGY': { color: primaryColor, info: 'Mısır: Kuzey Afrika\'ya Açılan Kapı' }, 
-        'ZAF': { color: primaryColor, info: 'Güney Afrika: Afrika Kıtası' }, 
-        'AUS': { color: primaryColor, info: 'Avustralya: Okyanusya Erişimi' }, 
-        'CAN': { color: primaryColor, info: 'Kanada: Kuzey Amerika Partneri' }, 
-        'BRA': { color: primaryColor, info: 'Brezilya: Güney Amerika\'nın Devi' }, 
+        // Önceden belirlenen ülkeler (isteğe bağlı olarak kalabilir veya kaldırılabilir)
+        'TUR': { color: primaryColor, info: 'Türkiye: Önemli Bir Pazar' },
+        'USA': { color: primaryColor, info: 'Amerika Birleşik Devletleri: Geniş Erişim' },
+        'DEU': { color: primaryColor, info: 'Almanya: Avrupa\'nın Kalbi' },
+        'GBR': { color: primaryColor, info: 'Birleşik Krallık: Stratejik Ortak' },
+        'FRA': { color: primaryColor, info: 'Fransa: Batı Avrupa Pazarı' },
+        'ESP': { color: primaryColor, info: 'İspanya: Akdeniz Bağlantısı' },
+        'ITA': { color: primaryColor, info: 'İtalya: Güney Avrupa\'da Güçlü' },
+        'RUS': { color: primaryColor, info: 'Rusya: Doğu\'ya Uzanan Köprü' },
+        'CHN': { color: primaryColor, info: 'Çin: Asya\'nın Büyükleri' },
+        'ZAF': { color: primaryColor, info: 'Güney Afrika: Afrika Kıtası' },
+        'AUS': { color: primaryColor, info: 'Avustralya: Okyanusya Erişimi' },
+        'CAN': { color: primaryColor, info: 'Kanada: Kuzey Amerika Partneri' },
+        'BRA': { color: primaryColor, info: 'Brezilya: Güney Amerika\'nın Devi' },
+
+        // Yeni eklenen ve kırmızıya boyanacak ülkeler
+        'IDN': { color: 'red', info: 'Endonezya: Satış Bölgesi' },
+        'BGD': { color: 'red', info: 'Bangladeş: Satış Bölgesi' },
+        'IND': { color: 'red', info: 'Hindistan: Satış Bölgesi' },
+        'MRT': { color: 'red', info: 'Moritanya: Satış Bölgesi' },
+        'MAR': { color: 'red', info: 'Fas: Satış Bölgesi' },
+        'DZA': { color: 'red', info: 'Cezayir: Satış Bölgesi' },
+        'TUN': { color: 'red', info: 'Tunus: Satış Bölgesi' },
+        'LBY': { color: 'red', info: 'Libya: Satış Bölgesi' },
+        'SDN': { color: 'red', info: 'Sudan: Satış Bölgesi' },
+        'ETH': { color: 'red', info: 'Etiyopya: Satış Bölgesi' },
+        'EGY': { color: 'red', info: 'Mısır: Satış Bölgesi' },
+        'JOR': { color: 'red', info: 'Ürdün: Satış Bölgesi' },
+        'PSE': { color: 'red', info: 'Filistin: Satış Bölgesi' },
+        'SYR': { color: 'red', info: 'Suriye: Satış Bölgesi' },
+        'IRQ': { color: 'red', info: 'Irak: Satış Bölgesi' },
+        'IRN': { color: 'red', info: 'İran: Satış Bölgesi' },
+        'BIH': { color: 'red', info: 'Bosna Hersek: Satış Bölgesi' },
+        'ALB': { color: 'red', info: 'Arnavutluk: Satış Bölgesi' },
+        'SRB': { color: 'red', info: 'Sırbistan: Satış Bölgesi' },
+        'SAU': { color: 'red', info: 'Suudi Arabistan: Satış Bölgesi' },
+        'CMR': { color: 'red', info: 'Kamerun: Satış Bölgesi' },
+        'MNG': { color: 'red', info: 'Moğolistan: Satış Bölgesi' },
         // İhracat yaptığınız diğer ülkeleri buraya ekleyebilirsiniz
         // ÖNEMLİ: Ülke kodlarının ISO 3 harfli olduğundan emin olun (örn: JPN, MEX, ARG, EGYPT değil EGY vb.)
     };
@@ -152,18 +172,18 @@ document.addEventListener('DOMContentLoaded', () => {
             L.geoJson(geojson, {
                 style: function(feature) {
                     const iso3 = feature.properties.ISO_A3;
-                    const data = exportCountriesData[iso3]; 
+                    const data = exportCountriesData[iso3];
                     if (data) {
                         return {
-                            fillColor: data.color,      
-                            weight: 1,                  
-                            opacity: 1,                 
-                            color: 'white',             
-                            fillOpacity: 0.8            
+                            fillColor: data.color,
+                            weight: 1,
+                            opacity: 1,
+                            color: 'white',
+                            fillOpacity: 0.8
                         };
                     }
                     return {
-                        fillColor: '#dcdcdc', 
+                        fillColor: '#dcdcdc',
                         weight: 1,
                         opacity: 1,
                         color: 'white',
@@ -171,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     };
                 },
                 onEachFeature: function(feature, layer) {
-                    const countryName = feature.properties.NAME; 
+                    const countryName = feature.properties.NAME;
                     const iso3 = feature.properties.ISO_A3;
                     const data = exportCountriesData[iso3];
 
@@ -179,18 +199,18 @@ document.addEventListener('DOMContentLoaded', () => {
                         mouseover: function(e) {
                             const layer = e.target;
                             layer.setStyle({
-                                weight: 3, 
-                                color: '#666', 
+                                weight: 3,
+                                color: '#666',
                                 dashArray: '',
-                                fillOpacity: 0.9 
+                                fillOpacity: 0.9
                             });
                             if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-                                layer.bringToFront(); 
+                                layer.bringToFront();
                             }
                             layer.bindTooltip(data ? data.info : `${countryName}: Veri Yok`).openTooltip();
                         },
                         mouseout: function(e) {
-                            layer.setStyle(this.options.style(feature)); 
+                            layer.setStyle(this.options.style(feature));
                             layer.closeTooltip();
                         },
                         click: function(e) {
