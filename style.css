@@ -356,7 +356,7 @@ section {
     text-align: center;
     color: var(--light-text-color); /* Metin rengi açık kalacak */
     
-    background-image: url('images/bgdesen1.png'); /* Desen görselinin yolu */
+    background-image: url('images/bgdesen2.png'); /* Desen görselinin yolu */
     background-repeat: repeat; /* Deseni tekrar et */
     background-size: auto; /* Desenin orijinal boyutunda kalsın */
     background-color: #1a1a1a; /* Ürün kategorilerindeki gibi koyu gri arka plan */
