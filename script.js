@@ -77,7 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         entry.target.dataset.counted = 'true'; // Sayıldığını işaretle
                     }
                 }
-                
                 // Animasyon bir kez çalıştıktan sonra (stat-item değilse bile) gözlemlemeyi bırak
                 // observer.unobserve(entry.target); // Eğer her animasyon sadece bir kez tetiklenecekse bu satırı aktif bırak
                 // Eğer scroll yukarı çıkıp tekrar aşağı inince animasyonun tekrar çalışmasını istiyorsan yukarıdaki satırı yorum satırı yap veya sil.
@@ -142,34 +141,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // GeoJSON verisini yükle ve haritaya ekle
     // Bu dosya, dünya ülkelerinin coğrafi sınırlarını içerir.
-    fetch('world-countries.geojson') 
+    fetch('world-countries.geojson') // DİKKAT: Artık 'js/' yok, dosya ana dizinde varsayılıyor
         .then(response => {
             if (!response.ok) {
-                // Hata durumunda konsola detaylı bilgi yaz
-                throw new Error(`GeoJSON yüklenemedi. HTTP Durumu: ${response.status} ${response.statusText}. Dosya yolunu kontrol edin: js/world-countries.geojson`);
+                throw new Error(`GeoJSON yüklenemedi. HTTP Durumu: ${response.status} ${response.statusText}. Dosya yolunu kontrol edin: world-countries.geojson`);
             }
             return response.json();
         })
         .then(geojson => {
             L.geoJson(geojson, {
                 style: function(feature) {
-                    // Her ülkenin özelliklerinden ISO_A3 kodunu al (GeoJSON dosyasında bu isimle)
                     const iso3 = feature.properties.ISO_A3;
-                    const data = exportCountriesData[iso3]; // Kendi verimizle eşleştir
-
-                    // Eğer o ülkeye ait veri varsa, özel renklendir
+                    const data = exportCountriesData[iso3]; 
                     if (data) {
                         return {
-                            fillColor: data.color,      // Veri varsa belirlenen renk
-                            weight: 1,                  // Sınır kalınlığı
-                            opacity: 1,                 // Sınır şeffaflığı
-                            color: 'white',             // Sınır çizgisi rengi
-                            fillOpacity: 0.8            // Dolgu şeffaflığı (daha opak yaptım)
+                            fillColor: data.color,      
+                            weight: 1,                  
+                            opacity: 1,                 
+                            color: 'white',             
+                            fillOpacity: 0.8            
                         };
                     }
-                    // Veri yoksa varsayılan gri tonunda stil
                     return {
-                        fillColor: '#dcdcdc', // Daha açık gri
+                        fillColor: '#dcdcdc', 
                         weight: 1,
                         opacity: 1,
                         color: 'white',
@@ -177,43 +171,34 @@ document.addEventListener('DOMContentLoaded', () => {
                     };
                 },
                 onEachFeature: function(feature, layer) {
-                    // Haritadaki her ülke için bir etkileşim tanımla
-                    const countryName = feature.properties.NAME; // Ülke adı
+                    const countryName = feature.properties.NAME; 
                     const iso3 = feature.properties.ISO_A3;
                     const data = exportCountriesData[iso3];
 
-                    // Hover (fare üzerine gelince) durumu
                     layer.on({
                         mouseover: function(e) {
                             const layer = e.target;
                             layer.setStyle({
-                                weight: 3, // Sınır kalınlığını artır
-                                color: '#666', // Sınır rengini değiştir
+                                weight: 3, 
+                                color: '#666', 
                                 dashArray: '',
-                                fillOpacity: 0.9 // Dolgu şeffaflığını artır
+                                fillOpacity: 0.9 
                             });
                             if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-                                layer.bringToFront(); // Katmanı öne getir
+                                layer.bringToFront(); 
                             }
-                            // Tooltip (bilgi kutusu) gösterme
                             layer.bindTooltip(data ? data.info : `${countryName}: Veri Yok`).openTooltip();
                         },
                         mouseout: function(e) {
-                            // Fare çekildiğinde eski stiline döndür
-                            // Leaflet'in resetStyle fonksiyonu ile kolayca yapılabilir
-                            // Ancak Leaflet 1.9.4 için resetStyle doğrudan GeoJSON katmanında çalışmayabilir
-                            // Bu yüzden stil fonksiyonunu tekrar çağırıyoruz
                             layer.setStyle(this.options.style(feature)); 
                             layer.closeTooltip();
                         },
                         click: function(e) {
-                            // Tıklama olayı (isteğe bağlı, detaylı bilgi için popup)
                             if (data) {
                                 layer.bindPopup(`<b>${countryName}</b><br>${data.info}`).openPopup();
                             } else {
                                 layer.bindPopup(`<b>${countryName}</b><br>Bu ülkeye ait detaylı veri bulunmamaktadır.`).openPopup();
                             }
-                            // Tıklanan ülkeye zoom yapma (isteğe bağlı)
                             map.fitBounds(layer.getBounds());
                         }
                     });
