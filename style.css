@@ -46,7 +46,7 @@ body {
 /* Başlıklar */
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-family-serif);
-    color: var(--text-color);
+    color: var(--text-color); /* Genel başlık rengi */
     margin-bottom: 1em;
     line-height: 1.2;
 }
@@ -445,7 +445,7 @@ section {
 }
 
 .world-map-section h2 {
-    color: #ffffff; /* Küresel Erişimimiz başlığını TAM beyaz yaptık */
+    color: #ffffff !important; /* Küresel Erişimimiz başlığını KESİNLİKLE beyaz yaptık */
     margin-bottom: 1.5em; /* Başlık ile harita arasına boşluk ekleyelim */
 }
 
