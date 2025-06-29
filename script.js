@@ -163,14 +163,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     };
                 },
                 onEachFeature: function(feature, layer) {
-                    const countryName = feature.properties.NAME || 'Bilinmeyen Ülke'; // Yedek isim korundu ama mouseover'da kullanılmayacak
+                    // Bu değişken sadece click olayında popup açılırsa kullanılabilir, mouseover'da artık kullanılmıyor.
+                    const countryName = feature.properties.NAME || 'Bilinmeyen Ülke';
                     const iso3 = feature.properties['ISO3166-1-Alpha-3'];
                     const data = exportCountriesData[iso3];
 
                     // Sadece data varsa tooltip'i bind et, içerik olarak direkt data.info kullanıldı
                     if (data) {
-                        layer.bindTooltip(`<b>${data.info}</b>`, { // DEĞİŞİKLİK BURADA: data.info kullanıldı
-                            sticky: true // Fareyi takip etmesi için sticky
+                        layer.bindTooltip(`<b>${data.info}</b>`, {
+                            sticky: true
                         });
                     }
 
@@ -178,30 +179,26 @@ document.addEventListener('DOMContentLoaded', () => {
                         mouseover: function(e) {
                             const layer = e.target;
                             // Stil değişikliği kaldırıldı. Ülke rengi koyulaşmayacak.
-                            // if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-                            //     layer.bringToFront(); // Z-index yükseltme de kaldırıldı
-                            // }
+                            // Z-index yükseltme de kaldırıldı.
+                            
                             // Eğer bu layer'a bir tooltip bind edilmişse, aç
                             if (layer.getTooltip()) {
                                 layer.openTooltip();
                             }
                         },
                         mouseout: function(e) {
+                            const layer = e.target;
                             // Stil değişikliği kaldırıldı.
-                            // layer.setStyle(this.options.style(feature));
+                            
                             // Sadece layer'a bir tooltip bind edilmişse kapat
                             if (layer.getTooltip()) {
                                 layer.closeTooltip();
                             }
                         },
                         click: function(e) {
-                            // Tıklama olayında ise tam bilgiyi (Ülke Adı ve Satış Bölgesi) göstermeye devam et
-                            if (data) {
-                                layer.bindPopup(`<b>${countryName}</b><br>${data.info}`).openPopup();
-                            } else {
-                                layer.bindPopup(`<b>${countryName}</b><br>Bu ülkeye ait detaylı veri bulunmamaktadır.`).openPopup();
-                            }
-                            map.fitBounds(layer.getBounds());
+                            // Tıklama olayında popup açılmayacak.
+                            // Eğer tıklayınca haritanın ülkeye odaklanmasını da istemiyorsanız aşağıdaki satırı kaldırabilirsiniz.
+                            // map.fitBounds(layer.getBounds());
                         }
                     });
                 }
