@@ -77,17 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         entry.target.dataset.counted = 'true'; // Sayıldığını işaretle
                     }
                 }
-                // Animasyon bir kez çalıştıktan sonra (stat-item değilse bile) gözlemlemeyi bırak
-                // observer.unobserve(entry.target); // Eğer her animasyon sadece bir kez tetiklenecekse bu satırı aktif bırak
-                // Eğer scroll yukarı çıkıp tekrar aşağı inince animasyonun tekrar çalışmasını istiyorsan yukarıdaki satırı yorum satırı yap veya sil.
-                // Not: animate-on-scroll her zaman çalışır, stat-item için ek kontrol var.
-            } else {
-                // Eğer öğe görünür alandan çıkarsa 'animated' sınıfını kaldır (isteğe bağlı, tekrar animasyon için)
-                // entry.target.classList.remove('animated');
-                // if (entry.target.classList.contains('stat-item')) {
-                //    entry.target.dataset.counted = 'false'; // Tekrar sayılabilir yapsın
-                //    entry.target.querySelector('.stat-number').textContent = '0'; // Sayıyı sıfırla
-                // }
             }
         });
     }, observerOptions);
@@ -141,11 +130,9 @@ document.addEventListener('DOMContentLoaded', () => {
         'CMR': { color: 'red', info: 'Kamerun: Satış Bölgesi' },
         'MNG': { color: 'red', info: 'Moğolistan: Satış Bölgesi' },
         // İhracat yaptığınız diğer ülkeleri buraya ekleyebilirsiniz
-        // ÖNEMLİ: Ülke kodlarının ISO 3 harfli olduğundan emin olun (örn: JPN, MEX, ARG, EGYPT değil EGY vb.)
     };
 
     // GeoJSON verisini yükle ve haritaya ekle
-    // Bu dosya, dünya ülkelerinin coğrafi sınırlarını içerir.
     fetch('world-countries.geojson')
         .then(response => {
             if (!response.ok) {
@@ -176,14 +163,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     };
                 },
                 onEachFeature: function(feature, layer) {
-                    // countryName'i alırken, eğer yoksa 'Bilinmeyen Ülke' gibi bir yedek isim kullan
-                    const countryName = feature.properties.NAME || 'Bilinmeyen Ülke';
+                    const countryName = feature.properties.NAME || 'Bilinmeyen Ülke'; // Yedek isim korundu ama mouseover'da kullanılmayacak
                     const iso3 = feature.properties['ISO3166-1-Alpha-3'];
                     const data = exportCountriesData[iso3];
 
-                    // Sadece data varsa tooltip'i bind et, içerik olarak sadece ülke adını kullanıyoruz.
+                    // Sadece data varsa tooltip'i bind et, içerik olarak direkt data.info kullanıldı
                     if (data) {
-                        layer.bindTooltip(`<b>${countryName}</b>`, {
+                        layer.bindTooltip(`<b>${data.info}</b>`, { // DEĞİŞİKLİK BURADA: data.info kullanıldı
                             sticky: true // Fareyi takip etmesi için sticky
                         });
                     }
@@ -191,22 +177,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     layer.on({
                         mouseover: function(e) {
                             const layer = e.target;
-                            layer.setStyle({
-                                weight: 3,
-                                color: '#666',
-                                dashArray: '',
-                                fillOpacity: 0.9
-                            });
-                            if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-                                layer.bringToFront();
-                            }
+                            // Stil değişikliği kaldırıldı. Ülke rengi koyulaşmayacak.
+                            // if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+                            //     layer.bringToFront(); // Z-index yükseltme de kaldırıldı
+                            // }
                             // Eğer bu layer'a bir tooltip bind edilmişse, aç
                             if (layer.getTooltip()) {
                                 layer.openTooltip();
                             }
                         },
                         mouseout: function(e) {
-                            layer.setStyle(this.options.style(feature));
+                            // Stil değişikliği kaldırıldı.
+                            // layer.setStyle(this.options.style(feature));
                             // Sadece layer'a bir tooltip bind edilmişse kapat
                             if (layer.getTooltip()) {
                                 layer.closeTooltip();
@@ -217,7 +199,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             if (data) {
                                 layer.bindPopup(`<b>${countryName}</b><br>${data.info}`).openPopup();
                             } else {
-                                // Data yoksa ve yine de tıklanırsa bu mesajı gösterebiliriz
                                 layer.bindPopup(`<b>${countryName}</b><br>Bu ülkeye ait detaylı veri bulunmamaktadır.`).openPopup();
                             }
                             map.fitBounds(layer.getBounds());
