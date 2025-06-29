@@ -354,28 +354,18 @@ section {
 .our-achievements {
     padding: var(--padding-section); /* Mevcut boşlukları koru */
     text-align: center;
+    color: var(--light-text-color); /* Metin rengi açık kalacak */
     
-    background-image: url('images/bgdesen1.png'); /* YENİ GÖRSEL ADI BURADA */
-    background-size: cover; /* Görseli tüm alanı kaplayacak şekilde boyutlandır */
-    background-position: center center; /* Görseli ortala */
-    background-repeat: no-repeat; /* Görseli tekrar etme */
-    background-attachment: fixed; /* Paralaks efekti için (isteğe bağlı) */
+    background-image: url('images/bgdesen1.png'); /* Desen görselinin yolu */
+    background-repeat: repeat; /* Deseni tekrar et */
+    background-size: auto; /* Desenin orijinal boyutunda kalsın */
+    background-color: #1a1a1a; /* Ürün kategorilerindeki gibi koyu gri arka plan */
 
-    position: relative; /* Overlay için */
-    z-index: 1; /* İçeriğin overlay'in üstünde olması için */
+    position: relative; /* İçerik z-index'i için */
+    z-index: 1; /* İçeriğin üstte olması için */
 }
 
-/* Arka plan görselinin üzerine bir karartma (overlay) ekleyelim */
-.our-achievements::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); /* %60 opaklıkta siyah overlay */
-    z-index: -1; /* Overlay'in arka plan görseli ile içerik arasına gelmesi için */
-}
+/* '::before' overlay'ini kaldırdık, çünkü arka plan rengi karartma görevi görecek */
 
 /* Bu bölümdeki başlık ve metinlerin renginin açık olduğundan emin olalım */
 .our-achievements h2 {
@@ -384,7 +374,7 @@ section {
     z-index: 2; 
 }
 
-/* İSTATİSTİK KUTUCUKLARI (STAT ITEMS) DÜZELTİLMİŞ HALİ */
+/* İSTATİSTİK KUTUCUKLARI (STAT ITEMS) */
 .stats-grid {
     display: grid; /* Grid düzenini geri getiriyoruz */
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Kare gibi yan yana durmaları için */
@@ -393,7 +383,7 @@ section {
 }
 
 .stat-item {
-    background-color: #fff; /* Kutucukların arka planı BEYAZ olsun, şeffaf değil */
+    background-color: #fff; /* Kutucukların arka planı BEYAZ olsun */
     color: var(--text-color); /* Kutucuklardaki genel metin rengi koyu olsun */
     padding: 30px;
     border-radius: 10px;
