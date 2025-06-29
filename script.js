@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================================================
 
     // Harita div'inin ID'si: 'world-map'
-    const map = L.map('world-map').setView([20, 0], 2); // [Enlem, Boylam], Zoom seviyesi (2, dünya görünümü için uygun)
+    const map = L.map('world-map', { scrollWheelZoom: false }).setView([20, 0], 2); // [Enlem, Boylam], Zoom seviyesi (2, dünya görünümü için uygun)
 
     // OpenStreetMap tile katmanını ekle
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
