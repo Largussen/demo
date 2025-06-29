@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // GeoJSON verisini yükle ve haritaya ekle
     // Bu dosya, dünya ülkelerinin coğrafi sınırlarını içerir.
-    fetch('js/world-countries.geojson') 
+    fetch('world-countries.geojson') 
         .then(response => {
             if (!response.ok) {
                 // Hata durumunda konsola detaylı bilgi yaz
