@@ -78,57 +78,58 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(element);
     });
 
-    // jVectorMap Haritası Başlatma
-    // jQuery'nin yüklendiğinden emin olmak için hazır olduğunda çalıştır
-    $(document).ready(function(){
-        console.log('jQuery ve jVectorMap başlatılıyor...'); // Bu mesajı konsolda görmelisiniz
+    // Not: Video iframe linki daha önce değiştirilmişti, eğer hala sorun varsa kontrol edin
+    // src="https://www.youtube-nocookie.com/embed/YOUR_YOUTUBE_VIDEO_ID?autoplay=1&mute=1&loop=1&playlist=YOUR_YOUTUBE_VIDEO_ID&controls=0&playsinline=1"
+});
 
-        // Kök değişkenlerinden renk almak için geçici bir element kullanma
-        const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim();
+// jVectorMap Haritası Başlatma - BU KISIM DOCUMENT.ADDEVENTLISTENER DIŞINA TAŞINDI!
+$(document).ready(function(){
+    console.log('jQuery ve jVectorMap başlatılıyor...'); // Bu mesajı konsolda görmelisiniz
 
-        // İhracat yaptığınız ülkeler ve renkleri
-        // Lütfen bu listeyi kendi ihracat yaptığınız ülkelerin ISO 2-harfli kodlarıyla güncelleyin
-        // Örnek: 'TR': primaryColor (Türkiye), 'US': primaryColor (Amerika), 'DE': primaryColor (Almanya) vb.
-        const exportCountries = {
-            'TR': primaryColor, // Türkiye
-            'US': primaryColor, // Amerika Birleşik Devletleri
-            'DE': primaryColor, // Almanya
-            'GB': primaryColor, // Birleşik Krallık
-            'FR': primaryColor, // Fransa
-            'ES': primaryColor, // İspanya
-            'IT': primaryColor, // İtalya
-            'RU': primaryColor, // Rusya
-            'CN': primaryColor, // Çin
-            'IN': primaryColor, // Hindistan
-            'AE': primaryColor, // Birleşik Arap Emirlikleri
-            'SA': primaryColor, // Suudi Arabistan
-            'EG': primaryColor, // Mısır
-            'ZA': primaryColor, // Güney Afrika
-            'AU': primaryColor, // Avustralya
-            'CA': primaryColor, // Kanada
-            'BR': primaryColor, // Brezilya
-            // İhracat yaptığınız diğer ülkeleri buraya ekleyebilirsiniz
-        };
+    // Kök değişkenlerinden renk almak için geçici bir element kullanma
+    const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim();
 
-        $('#world-map').vectorMap({
-            map: 'world_mill', // Dünya haritası projeksiyonu (düzleştirilmiş)
-            backgroundColor: '#f8f8f8', // Haritanın arkaplan rengi
-            series: {
-                regions: [{
-                    values: exportCountries, // Vurgulanacak ülkeler ve renkleri
-                    scale: [primaryColor], // Ölçek, vurgu rengini belirliyor
-                    normalizeFunction: 'polynomial' // Renk normalizasyon fonksiyonu
-                }]
-            },
-            onRegionTipShow: function(e, el, code){
-                // Mouse ile üzerine gelindiğinde ülke adını ve ek bilgi gösterme
-                if (exportCountries[code]) {
-                    el.html(el.html() + ' (İhracat Yapılıyor)');
-                } else {
-                    el.html(el.html()); // Sadece ülke adını göster
-                }
+    // İhracat yaptığınız ülkeler ve renkleri
+    // Lütfen bu listeyi kendi ihracat yaptığınız ülkelerin ISO 2-harfli kodlarıyla güncelleyin
+    const exportCountries = {
+        'TR': primaryColor, // Türkiye
+        'US': primaryColor, // Amerika Birleşik Devletleri
+        'DE': primaryColor, // Almanya
+        'GB': primaryColor, // Birleşik Krallık
+        'FR': primaryColor, // Fransa
+        'ES': primaryColor, // İspanya
+        'IT': primaryColor, // İtalya
+        'RU': primaryColor, // Rusya
+        'CN': primaryColor, // Çin
+        'IN': primaryColor, // Hindistan
+        'AE': primaryColor, // Birleşik Arap Emirlikleri
+        'SA': primaryColor, // Suudi Arabistan
+        'EG': primaryColor, // Mısır
+        'ZA': primaryColor, // Güney Afrika
+        'AU': primaryColor, // Avustralya
+        'CA': primaryColor, // Kanada
+        'BR': primaryColor, // Brezilya
+        // İhracat yaptığınız diğer ülkeleri buraya ekleyebilirsiniz
+    };
+
+    $('#world-map').vectorMap({
+        map: 'world_mill', // Dünya haritası projeksiyonu (düzleştirilmiş)
+        backgroundColor: '#f8f8f8', // Haritanın arkaplan rengi
+        series: {
+            regions: [{
+                values: exportCountries, // Vurgulanacak ülkeler ve renkleri
+                scale: [primaryColor], // Ölçek, vurgu rengini belirliyor
+                normalizeFunction: 'polynomial' // Renk normalizasyon fonksiyonu
+            }]
+        },
+        onRegionTipShow: function(e, el, code){
+            // Mouse ile üzerine gelindiğinde ülke adını ve ek bilgi gösterme
+            if (exportCountries[code]) {
+                el.html(el.html() + ' (İhracat Yapılıyor)');
+            } else {
+                el.html(el.html()); // Sadece ülke adını göster
             }
-        });
-        console.log('jVectorMap başlatma kodu tamamlandı.'); // Bu mesajı da konsolda görmelisiniz
+        }
     });
+    console.log('jVectorMap başlatma kodu tamamlandı.'); // Bu mesajı da konsolda görmelisiniz
 });
