@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // GeoJSON verisini yükle ve haritaya ekle
     // Bu dosya, dünya ülkelerinin coğrafi sınırlarını içerir.
-    fetch('world-countries.geojson') 
+    fetch('world-countries.geojson')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`GeoJSON yüklenemedi. HTTP Durumu: ${response.status} ${response.statusText}. Dosya yolunu kontrol edin: world-countries.geojson`);
@@ -177,8 +177,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 onEachFeature: function(feature, layer) {
                     const countryName = feature.properties.NAME;
-                    const iso3 = feature.properties['ISO3166-1-Alpha-3'];
+                    const iso3 = feature.properties['ISO3166-1-Alpha-3']; // Düzeltme yapıldı
                     const data = exportCountriesData[iso3];
+
+                    // Sadece data varsa tooltip'i bind et
+                    if (data) {
+                        layer.bindTooltip(`<b>${countryName}</b><br>${data.info}`);
+                    }
 
                     layer.on({
                         mouseover: function(e) {
@@ -192,16 +197,21 @@ document.addEventListener('DOMContentLoaded', () => {
                             if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
                                 layer.bringToFront();
                             }
-                            layer.bindTooltip(data ? data.info : `${countryName}: Veri Yok`).openTooltip();
+                            // Sadece data varsa tooltip'i aç
+                            if (data) {
+                                layer.openTooltip();
+                            }
                         },
                         mouseout: function(e) {
                             layer.setStyle(this.options.style(feature));
                             layer.closeTooltip();
                         },
                         click: function(e) {
+                            // Click olayında da sadece data varsa popup aç
                             if (data) {
                                 layer.bindPopup(`<b>${countryName}</b><br>${data.info}`).openPopup();
                             } else {
+                                // Data yoksa ve yine de tıklanırsa bu mesajı gösterebiliriz
                                 layer.bindPopup(`<b>${countryName}</b><br>Bu ülkeye ait detaylı veri bulunmamaktadır.`).openPopup();
                             }
                             map.fitBounds(layer.getBounds());
