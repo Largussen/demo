@@ -236,6 +236,19 @@ section {
     color: #eee;
 }
 
+/* Hero Bölümündeki "Ürünlerimizi Keşfedin" Butonu */
+.hero-content .btn-primary {
+    background-color: rgba(0, 0, 0, 0.7); /* Siyah ve %70 şeffaf */
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Hafif beyaz kenarlık */
+    color: var(--light-text-color); /* Metin rengi açık olacak */
+}
+
+.hero-content .btn-primary:hover {
+    background-color: rgba(0, 0, 0, 0.9); /* Hoverda daha az şeffaf veya tam siyah */
+    border-color: var(--primary-color); /* Hoverda kenarlık rengi değişebilir */
+    color: var(--primary-color); /* Hoverda metin rengi değişebilir */
+}
+
 /* Responsive için Hero Font Size */
 @media (max-width: 768px) {
     .hero-content h1 {
@@ -438,7 +451,7 @@ section {
 
 /* 6. CTA Contact */
 .cta-contact {
-    background-color: var(--primary-color);
+    background-color: rgba(0, 0, 0, 0.7); /* Siyah ve %70 şeffaf */
     color: var(--light-text-color);
     text-align: center;
     padding: 60px 0;
