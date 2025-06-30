@@ -616,3 +616,195 @@ section {
 .fade-in-up {
     /* animate-on-scroll ile aynı */
 }
+
+/* =========================================== */
+/* Responsive Tasarım Başlangıcı               */
+/* =========================================== */
+
+/* Tabletler ve Daha Küçük Dizüstü Bilgisayarlar (<= 992px) */
+@media (max-width: 992px) {
+    :root {
+        --padding-section: 60px 0; /* Bölüm boşluklarını azalt */
+    }
+
+    /* Header */
+    .header .logo img {
+        height: 45px; /* Logo biraz küçülsün */
+    }
+
+    .main-nav ul {
+        flex-direction: column; /* Navigasyon öğeleri alt alta gelsin */
+        position: absolute;
+        top: var(--header-height); /* Header'ın hemen altına */
+        left: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.95); /* Koyu arka plan */
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        display: none; /* Varsayılan olarak gizli */
+        padding: 20px 0;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        max-height: calc(100vh - var(--header-height)); /* Ekran yüksekliğini aşmasın */
+        overflow-y: auto; /* İçerik taşarsa kaydırılabilir olsun */
+    }
+
+    .main-nav ul.active {
+        display: flex; /* Aktif olduğunda göster */
+    }
+
+    .main-nav ul li {
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .main-nav ul li a {
+        font-size: 1.2em;
+        padding: 10px 0;
+        display: block; /* Tam genişliği kaplasın */
+    }
+
+    /* Hamburger Menü İkonu */
+    .menu-toggle {
+        display: block; /* Hamburger ikonunu göster */
+        color: var(--light-text-color);
+        font-size: 1.8em;
+        cursor: pointer;
+        z-index: 1001; /* Header'ın üzerinde kalsın */
+    }
+
+    /* Hero Section */
+    .hero-content h1 {
+        font-size: 3.2em; /* Başlığı küçült */
+    }
+    .hero-content p {
+        font-size: 1.1em; /* Paragrafı küçült */
+        padding: 0 15px;
+    }
+
+    /* Product Categories ve Our Achievements Grid */
+    .category-grid,
+    .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Daha az sütun veya daha küçük min genişlik */
+        gap: 20px;
+    }
+    
+    .category-item img {
+        height: 180px; /* Görsel yüksekliğini küçült */
+    }
+
+    /* Footer */
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .footer-section {
+        min-width: unset;
+        width: 90%; /* Daha geniş bir alan kaplasın */
+        margin-bottom: 30px;
+    }
+    .footer-section:last-child {
+        margin-bottom: 0;
+    }
+    .footer-section h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .footer-section.contact p {
+        justify-content: center;
+    }
+}
+
+/* Telefonlar (<= 768px) */
+@media (max-width: 768px) {
+    :root {
+        --header-height: 70px; /* Header yüksekliğini biraz daha küçült */
+        --padding-section: 40px 0; /* Bölüm boşluklarını daha da azalt */
+    }
+
+    /* Hero Section */
+    .hero-content h1 {
+        font-size: 2.5em; /* Başlığı daha da küçült */
+    }
+    .hero-content p {
+        font-size: 1em; /* Paragrafı daha da küçült */
+    }
+    .hero-content .btn {
+        padding: 10px 20px; /* Buton boyutunu küçült */
+        font-size: 0.9em;
+    }
+
+    /* Genel Başlıklar */
+    h2 {
+        font-size: 2em; /* Bölüm başlıklarını küçült */
+        margin-bottom: 1em;
+    }
+
+    /* Ürün Kategorileri ve İstatistikler */
+    .category-grid,
+    .stats-grid {
+        grid-template-columns: 1fr; /* Tek sütuna düşür */
+        gap: 25px;
+    }
+
+    .stat-item {
+        padding: 25px;
+    }
+    .stat-number {
+        font-size: 3em; /* Sayıları biraz küçült */
+    }
+    .stat-item p {
+        font-size: 1.1em;
+    }
+
+    /* World Map Section */
+    #world-map {
+        width: 100%; /* Harita tam genişliği kaplasın */
+        height: auto; /* Yüksekliğini orantılı ayarlasın */
+    }
+    /* Gerekirse haritanın container'ına veya kendisine max-width ve margin: auto ekleyerek ortalayabilirsiniz */
+    .world-map-container { /* Eğer haritanın çevresinde bir div varsa */
+        max-width: 100%;
+        margin: 0 auto;
+    }
+}
+
+/* Küçük Telefonlar (<= 576px) */
+@media (max-width: 576px) {
+    :root {
+        --header-height: 60px; /* En küçük header yüksekliği */
+        --padding-section: 30px 0; /* En az bölüm boşluğu */
+    }
+
+    .header .logo img {
+        height: 40px; /* En küçük logo boyutu */
+    }
+
+    .hero-content h1 {
+        font-size: 2em; /* En küçük başlık */
+    }
+    .hero-content p {
+        font-size: 0.9em; /* En küçük paragraf */
+    }
+    .hero-content .btn {
+        padding: 8px 18px; /* En küçük buton */
+        font-size: 0.85em;
+    }
+
+    h2 {
+        font-size: 1.8em; /* En küçük bölüm başlıkları */
+    }
+
+    .category-item img {
+        height: 150px; /* En küçük görsel yüksekliği */
+    }
+
+    .stat-item {
+        padding: 20px;
+    }
+    .stat-number {
+        font-size: 2.8em;
+    }
+    .stat-item p {
+        font-size: 1em;
+    }
+}
