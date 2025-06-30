@@ -334,15 +334,30 @@ section {
     padding: 0 15px;
 }
 
+/* GÜNCELLENMİŞ: Tüm Ürünleri Gör kutusu */
 .category-item.view-all-products {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--primary-color); /* Tüm ürünleri gör kutusu ana renk */
-    color: var(--light-text-color);
+    justify-content: center; /* Dikeyde ortala */
+    align-items: center;   /* Yatayda ortala */
+    text-align: center;    /* Metni ortala */
+    
+    /* Şeffaf arka plan ve kenarlık */
+    background-color: rgba(0, 0, 0, 0.4); /* Tüm ürünleri gör kutusu siyah ve şeffaf */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Hafif beyaz kenarlık */
+    
+    color: var(--light-text-color); /* Metin rengi açık kalacak */
     font-size: 1.2em;
     font-weight: 600;
+    transition: all 0.3s ease; /* Hover geçişleri için */
+    padding: 20px; /* İç boşluğu ayarla */
+}
+
+.category-item.view-all-products:hover {
+    background-color: rgba(0, 0, 0, 0.7); /* Hoverda daha az şeffaf, daha koyu */
+    border-color: var(--primary-color); /* Hoverda kenarlık ana renk olsun */
+    transform: translateY(-5px); /* Hafif yukarı kalkma efekti */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Daha belirgin gölge */
 }
 
 .category-item.view-all-products h3 {
@@ -351,19 +366,22 @@ section {
 }
 
 .category-item.view-all-products p {
-    color: rgba(255, 255, 255, 0.8); /* Hafif şeffaf beyaz metin */
+    color: rgba(255, 255, 255, 0.7); /* Hafif şeffaf beyaz metin */
     margin-bottom: 20px;
+    font-size: 0.9em; /* Paragrafı biraz küçülttük */
 }
 
 .category-item.view-all-products .fas {
     font-size: 2em;
-    color: var(--light-text-color); /* Beyaz ikon */
-    transition: transform 0.3s ease;
+    color: var(--primary-color); /* İkon rengini primary color yaptık */
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .category-item.view-all-products:hover .fas {
     transform: translateX(10px);
+    color: var(--light-text-color); /* Hoverda ikon beyaz olsun */
 }
+
 
 /* 4. Our Achievements */
 .our-achievements {
